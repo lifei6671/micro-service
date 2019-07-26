@@ -1,0 +1,29 @@
+//定义协议版本.
+syntax = "proto3";
+
+//定义包名.
+package kafka;
+
+//定义一个服务.
+service KafkaProducer {
+    rpc SinglePublish (MessageRequest) returns (MessageResponse) {
+    }
+    rpc MultiPublish(stream MessageRequest) returns (stream MessageResponse){}
+}
+
+//定义参数
+message MessageRequest {
+    int32 Version = 1;
+    string MessageId = 2;
+    string ClientId = 3;
+    string Key = 4;
+    bytes MessageBody = 5;
+}
+
+message MessageResponse {
+    int32 Code = 1;
+    string Message = 2;
+    string MessageId = 3;
+}
+
+

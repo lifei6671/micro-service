@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: default
+  name: grpc-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-service
+    spec:
+      containers:
+        - name: grpc-service
+          command: [
+            "/grpc_service",
+            "--server_name=grpc-service",
+            "--server_address=0.0.0.0:10080",
+            "--broker_address=0.0.0.0:10001",
+            "--selector=static"
+          ]
+          image: lifei6671/grpc-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 10080
+              name: grpc-port

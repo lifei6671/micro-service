@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service
+  labels:
+    app: grpc-service
+spec:
+  ports:
+    - port: 10080
+      protocol: TCP
+
+  type: NodePort
+  selector:
+    app: grpc-service
